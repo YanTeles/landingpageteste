@@ -68,9 +68,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 @media(max-width:480px){.ticker-inner{font-size:.55rem!important;gap:1.5rem}}
 
 /* ebook mockup */
-.ebook{width:210px;height:290px;background:linear-gradient(160deg,#0a1520,#050810);border:1px solid rgba(59,130,246,.38);border-radius:2px 9px 9px 2px;position:relative;overflow:hidden;box-shadow:-8px 8px 28px rgba(0,0,0,.85),2px 0 0 rgba(59,130,246,.15),-2px 0 0 #040300}
-.ebook::before{content:'';position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg,#040300,rgba(59,130,246,.12),#050810)}
-.ebook::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.07) 0%,transparent 55%,rgba(59,130,246,.03) 100%)}
+.ebook{width:240px;height:340px;background:linear-gradient(155deg,#020617,#0b1120);border:1px solid rgba(148,163,184,.85);border-radius:6px 18px 18px 6px;position:relative;overflow:hidden;box-shadow:-12px 10px 32px rgba(0,0,0,.9),0 0 40px rgba(37,99,235,.45)}
+.ebook::before{content:'';position:absolute;left:0;top:0;bottom:0;width:18px;background:linear-gradient(90deg,#000000,rgba(148,163,184,.55),#020617)}
+.ebook::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 0%,rgba(96,165,250,.28) 0,transparent 55%),linear-gradient(135deg,rgba(15,23,42,.25) 0%,transparent 60%,rgba(15,23,42,.45) 100%)}
 
 @keyframes pulse-ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.65);opacity:0}}
 
@@ -253,7 +253,7 @@ VA({
     </div>
 
     <!-- CONTENT -->
-    <div class="hg hero-wrap" style="display:grid;grid-template-columns:1.15fr .85fr;gap:4.5rem;align-items:center;max-width:1080px;margin:0 auto;padding:5rem 1.5rem 4rem">
+    <div class="hg hero-wrap" style="display:grid;grid-template-columns:1.1fr .9fr;gap:4.2rem;align-items:center;max-width:1160px;margin:0 auto;padding:5rem 1.5rem 4rem">
 
       <!-- LEFT -->
       <div>
@@ -289,23 +289,23 @@ VA({
 
       <!-- RIGHT — EBOOK MOCKUP -->
       <div class="reveal d2" style="display:flex;justify-content:center">
-        <div class="animate-float" style="position:relative">
-          <div style="position:absolute;inset:-36px;background:radial-gradient(ellipse,rgba(59,130,246,.17) 0%,transparent 70%);pointer-events:none"></div>
-          <div class="ebook-shadow" style="position:absolute;left:12px;top:14px;width:210px;height:290px;background:rgba(0,0,0,.5);filter:blur(18px)"></div>
+        <div class="animate-float" style="position:relative;transform:translateY(8px)">
+          <div style="position:absolute;inset:-30px;background:radial-gradient(ellipse at 50% 40%,rgba(37,99,235,.32) 0%,transparent 70%);pointer-events:none"></div>
+          <div class="ebook-shadow" style="position:absolute;left:16px;top:18px;width:240px;height:340px;background:rgba(0,0,0,.65);filter:blur(22px)"></div>
           <div class="ebook">
             <div style="position:relative;z-index:1;padding:1.6rem 1.3rem 1.3rem 1.9rem;height:100%;display:flex;flex-direction:column">
-              <div style="font-size:.52rem;font-family:'Cinzel',serif;font-weight:600;color:rgba(59,130,246,.7);letter-spacing:.2em;margin-bottom:.5rem">E-BOOK PREMIUM 2025</div>
+              <div style="font-size:.7rem;font-family:'Cinzel',serif;font-weight:700;color:#E0E7FF;letter-spacing:.18em;margin-bottom:.7rem;text-transform:uppercase">E-BOOK PREMIUM 2025</div>
               <div style="width:32px;height:1px;background:linear-gradient(90deg,#1E40AF,#3B82F6);margin-bottom:.8rem"></div>
               <div style="font-family:'Cinzel',serif;font-size:1.05rem;font-weight:900;color:#E0E7FF;line-height:1.2;margin-bottom:.3rem">IA<br>Descomplicada</div>
-              <div style="font-family:'Cormorant Garamond',serif;font-size:.72rem;font-weight:500;font-style:italic;color:#93C5FD;margin-bottom:1rem">Do Zero ao Avançado</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:600;font-style:italic;color:#F9FAFB;margin-bottom:1.1rem">Do Zero ao Avançado</div>
               <div style="display:flex;flex-direction:column;gap:.35rem;flex:1">
-                <div v-for="c in caps" :key="c" style="font-size:.56rem;font-weight:500;color:#A0AEC0;display:flex;align-items:center;gap:.35rem">
-                  <span style="color:#3B82F6;font-size:.48rem">▸</span>{{c}}
+                <div v-for="c in caps" :key="c" style="font-size:.8rem;font-weight:600;color:#C7D2FE;display:flex;align-items:center;gap:.4rem">
+                  <span style="color:#60A5FA;font-size:.6rem">▸</span>{{c}}
                 </div>
               </div>
               <div style="margin-top:.8rem;padding-top:.6rem;border-top:1px solid rgba(59,130,246,.14)">
                 <div style="font-family:'Cinzel',serif;font-size:1.35rem;font-weight:900;color:#3B82F6">R$37</div>
-                <div style="font-size:.52rem;font-weight:500;color:#718096;letter-spacing:.1em">180+ PÁGINAS · PDF + EPUB</div>
+                <div style="font-size:.75rem;font-weight:600;color:#E0E7FF;letter-spacing:.14em">180+ PÁGINAS · PDF + EPUB</div>
               </div>
             </div>
           </div>
