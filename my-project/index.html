@@ -1,14 +1,823 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
-    <title>my-project</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IA Descomplicada — O Guia Definitivo de Inteligência Artificial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Montserrat:wght@300;400;500;600;700&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{gold:{DEFAULT:'#C9A84C',light:'#E8C96A',dark:'#7A5C1E',shimmer:'#F5E094'},obsidian:{DEFAULT:'#080808',card:'#131313',border:'#1E1E1E'}},fontFamily:{display:['Cinzel','serif'],serif:['Cormorant Garamond','serif'],sans:['Montserrat','sans-serif']},animation:{'float':'float 5s ease-in-out infinite','shimmer':'shimmer 3s linear infinite','pulse-gold':'pulse-gold 2.5s ease-in-out infinite','ticker':'ticker 25s linear infinite'},keyframes:{float:{'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-14px)'}},shimmer:{'0%':{backgroundPosition:'-200% 0'},'100%':{backgroundPosition:'200% 0'}},'pulse-gold':{'0%,100%':{boxShadow:'0 0 0 0 rgba(201,168,76,0.5)'},'50%':{boxShadow:'0 0 0 18px rgba(201,168,76,0)'}},ticker:{'0%':{transform:'translateX(0)'},'100%':{transform:'translateX(-50%)'}}}}}}
+</script>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#C9A84C;--gold-dark:#7A5C1E;--gold-shimmer:#F5E094;--card:#131313;--border:#1E1E1E;--cream:#F0EAD6}
+html{scroll-behavior:smooth}
+body{background:#080808;color:#F0EAD6;font-family:'Montserrat',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#080808}::-webkit-scrollbar-thumb{background:#7A5C1E;border-radius:2px}
+
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")}
+
+.gold-text{background:linear-gradient(135deg,var(--gold-shimmer),var(--gold),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gold-anim{background:linear-gradient(90deg,var(--gold-dark),var(--gold-shimmer),var(--gold),var(--gold-dark));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+.grid-bg{background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:48px 48px}
+.gold-bar{height:1px;background:linear-gradient(90deg,transparent,var(--gold-dark) 20%,var(--gold) 50%,var(--gold-dark) 80%,transparent)}
+.gold-line{width:54px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+.btn-gold{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2.4rem;background:linear-gradient(135deg,#7A5C1E,#C9A84C,#E8C96A);color:#080808;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.83rem;letter-spacing:.12em;text-transform:uppercase;border:none;border-radius:1px;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.btn-gold::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#F5E094,#E8C96A);opacity:0;transition:opacity .3s}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(201,168,76,.35)}.btn-gold:hover::after{opacity:1}
+.btn-gold span,.btn-gold svg{position:relative;z-index:1}
+
+.btn-out{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.8rem;background:transparent;color:var(--gold);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(201,168,76,.35);border-radius:1px;cursor:pointer;text-decoration:none;transition:all .3s}
+.btn-out:hover{background:rgba(201,168,76,.07);border-color:var(--gold)}
+
+.card{background:var(--card);border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color .4s,transform .35s}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.04),transparent 60%);pointer-events:none}
+.card:hover{border-color:rgba(201,168,76,.26);transform:translateY(-4px)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+.sl{font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.st{font-family:'Cinzel',serif;font-size:clamp(1.85rem,4.5vw,3.1rem);font-weight:900;line-height:1.1}
+
+#progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,#7A5C1E,#C9A84C,#F5E094);z-index:10001;transition:width .1s linear}
+
+#sbar{position:fixed;bottom:-80px;left:0;right:0;background:rgba(8,8,8,.97);border-top:1px solid rgba(201,168,76,.2);backdrop-filter:blur(18px);z-index:9000;transition:bottom .4s cubic-bezier(.4,0,.2,1);padding:.8rem 2rem}
+#sbar.show{bottom:0}
+
+.notif{position:fixed;bottom:86px;left:1.5rem;background:var(--card);border:1px solid rgba(201,168,76,.18);padding:.8rem 1.1rem;border-radius:2px;display:flex;align-items:center;gap:.7rem;font-size:.76rem;z-index:8000;transform:translateX(-250%);transition:transform .45s cubic-bezier(.4,0,.2,1);max-width:265px;box-shadow:0 20px 50px rgba(0,0,0,.7)}
+.notif.show{transform:translateX(0)}
+
+.cdb{background:var(--card);border:1px solid var(--border);padding:.45rem .85rem;min-width:52px;text-align:center}
+.vwrap{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#120e00,#080808);border:1px solid rgba(201,168,76,.22);overflow:hidden;cursor:pointer}
+.fab-body{max-height:0;overflow:hidden;transition:max-height .4s ease}.fab-body.open{max-height:280px}
+.ticker-inner{display:inline-flex;gap:3rem;animation:ticker 25s linear infinite;white-space:nowrap}
+
+/* ebook mockup */
+.ebook{width:210px;height:290px;background:linear-gradient(160deg,#1a1100,#0c0900);border:1px solid rgba(201,168,76,.38);border-radius:2px 9px 9px 2px;position:relative;overflow:hidden;box-shadow:-8px 8px 28px rgba(0,0,0,.85),2px 0 0 rgba(201,168,76,.15),-2px 0 0 #040300}
+.ebook::before{content:'';position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg,#040300,rgba(201,168,76,.12),#0c0900)}
+.ebook::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.07) 0%,transparent 55%,rgba(201,168,76,.03) 100%)}
+
+@keyframes pulse-ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.65);opacity:0}}
+
+@media(max-width:768px){
+  .hnav{display:none!important}
+  .hg{grid-template-columns:1fr!important}
+  .t2{grid-template-columns:1fr!important}
+  .t3{grid-template-columns:1fr!important;max-width:420px;margin-left:auto;margin-right:auto}
+  .tg{grid-template-columns:1fr!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div id="nav-app"></div>
+<div id="hero-app"></div>
+<div id="video-app"></div>
+<div id="benefits-app"></div>
+<div id="testi-app"></div>
+<div id="faq-app"></div>
+<div id="checkout-app"></div>
+
+<!-- FOOTER -->
+<footer style="background:#050505;border-top:1px solid #161616;padding:3.5rem 1.5rem;text-align:center">
+  <div style="max-width:820px;margin:0 auto">
+    <div style="font-family:'Cinzel',serif;color:#C9A84C;font-size:1rem;letter-spacing:.2em;margin-bottom:.9rem">✦ IA DESCOMPLICADA</div>
+    <p style="font-size:.7rem;color:#2e2e2e;max-width:540px;margin:0 auto 1.4rem;line-height:1.7">Este e-book é um produto educacional. Os resultados variam conforme o esforço e aplicação individual de cada leitor.</p>
+    <div style="display:flex;justify-content:center;gap:2rem;margin-bottom:.9rem">
+      <a href="#" style="font-size:.7rem;color:#2e2e2e;text-decoration:none" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#2e2e2e'">Termos de Uso</a>
+      <a href="#" style="font-size:.7rem;color:#2e2e2e;text-decoration:none" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#2e2e2e'">Privacidade</a>
+      <a href="#" style="font-size:.7rem;color:#2e2e2e;text-decoration:none" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='#2e2e2e'">Contato</a>
+    </div>
+    <p style="font-size:.65rem;color:#181818">© 2025 IA Descomplicada. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div id="sbar">
+  <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+    <div>
+      <div style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.82rem;letter-spacing:.08em">🔥 Promoção por Tempo Limitado</div>
+      <div style="font-size:.7rem;color:#555;margin-top:2px">E-book completo de IA por apenas R$37</div>
+    </div>
+    <a href="#checkout" class="btn-gold" style="padding:.65rem 1.6rem;font-size:.75rem">
+      <span>Quero Meu E-book — R$37</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif">
+  <div style="width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 7px #22c55e"></div>
+  <span id="notif-text" style="color:#A09070">Maria de SP acabou de baixar</span>
+</div>
+
+
+<!-- ══════════════════════════════════
+  VUE — NAVBAR
+══════════════════════════════════ -->
+<script>
+const {createApp:VA,ref,onMounted}=Vue;
+VA({
+  template:`
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:9500;transition:all .4s"
+       :style="s?'background:rgba(8,8,8,.96);backdrop-filter:blur(18px);border-bottom:1px solid #1a1a1a':'background:transparent'">
+    <div style="max-width:1080px;margin:0 auto;padding:.9rem 1.5rem;display:flex;align-items:center;gap:2rem">
+      <div style="font-family:'Cinzel',serif;color:#C9A84C;letter-spacing:.15em;font-size:.95rem;white-space:nowrap;flex-shrink:0">✦ IA DESCOMPLICADA</div>
+      <div class="hnav" style="display:flex;gap:2rem;flex:1;justify-content:center">
+        <a v-for="l in links" :key="l.h" :href="l.h"
+           style="font-size:.73rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;text-decoration:none;transition:color .3s;color:#555"
+           @mouseover="e=>e.target.style.color='#C9A84C'" @mouseout="e=>e.target.style.color='#555'">{{l.n}}</a>
+      </div>
+      <a href="#checkout" class="btn-gold" style="padding:.55rem 1.3rem;font-size:.72rem;white-space:nowrap"><span>Comprar E-book</span></a>
+    </div>
+    <div v-if="s" class="gold-bar" style="opacity:.4"></div>
+  </nav>`,
+  setup(){
+    const s=ref(false);
+    const links=[{h:'#video',n:'Sobre'},{h:'#benefits',n:'Conteúdo'},{h:'#depoimentos',n:'Feedbacks'},{h:'#faq',n:'FAQ'}];
+    onMounted(()=>window.addEventListener('scroll',()=>s.value=window.scrollY>50));
+    return{s,links};
+  }
+}).mount('#nav-app');
+</script>
+
+
+<!-- ══════════════════════════════════
+  VUE — HERO
+══════════════════════════════════ -->
+<script>
+VA({
+  template:`
+  <section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding-top:72px" class="grid-bg">
+    <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(201,168,76,.09) 0%,transparent 70%)"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:150px;pointer-events:none;background:linear-gradient(to bottom,transparent,#080808)"></div>
+
+    <!-- TICKER -->
+    <div style="position:absolute;top:64px;left:0;right:0;overflow:hidden;padding:.45rem 0;background:rgba(201,168,76,.05);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1)">
+      <div class="ticker-inner" style="color:rgba(201,168,76,.6);font-size:.68rem;letter-spacing:.12em">
+        <span v-for="i in 10" :key="i">✦ IA DESCOMPLICADA &nbsp;&nbsp; 180+ PÁGINAS &nbsp;&nbsp; DOWNLOAD IMEDIATO &nbsp;&nbsp;;&nbsp; PROMOÇÃO POR TEMPO LIMITADO &nbsp;&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="hg" style="display:grid;grid-template-columns:1.15fr .85fr;gap:4.5rem;align-items:center;max-width:1080px;margin:0 auto;padding:5rem 1.5rem 4rem">
+
+      <!-- LEFT -->
+      <div>
+        <div class="sl reveal">E-book Digital · Edição 2025</div>
+        <h1 class="reveal d1" style="font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;margin-bottom:1.1rem">
+          <span style="display:block;color:#F0EAD6">Domine a</span>
+          <span class="gold-anim" style="display:block">Inteligência Artificial</span>
+          <span style="display:block;color:#F0EAD6">do Zero ao Avançado</span>
+        </h1>
+        <div class="gold-line reveal d2" style="margin-bottom:1.4rem"></div>
+        <p class="reveal d2" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.8;color:#9A8060;font-style:italic;margin-bottom:2rem">
+          O guia mais completo para aprender a usar <strong style="color:#C9A84C;font-style:normal">ChatGPT, Gemini, Copilot e as principais ferramentas de IA</strong> para turbinar produtividade, carreira e negócio — mesmo sem conhecimento técnico.
+        </p>
+        <!-- STATS -->
+        <div class="reveal d3" style="display:flex;gap:1rem;margin-bottom:2.2rem;flex-wrap:wrap">
+          <div v-for="s in stats" :key="s.v" class="card" style="padding:.75rem 1.2rem">
+            <div style="font-family:'Cinzel',serif;font-size:1.45rem;font-weight:900;color:#C9A84C">{{s.v}}</div>
+            <div style="font-size:.66rem;color:#555;letter-spacing:.08em;margin-top:2px">{{s.l}}</div>
+          </div>
+        </div>
+        <!-- CTA -->
+        <div class="reveal d4" style="display:flex;flex-direction:column;gap:.8rem;align-items:flex-start">
+          <a href="#checkout" class="btn-gold animate-pulse-gold">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            <span>Quero o E-book por R$37</span>
+          </a>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#333">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Download imediato · Sem mensalidade
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — EBOOK MOCKUP -->
+      <div class="reveal d2" style="display:flex;justify-content:center">
+        <div class="animate-float" style="position:relative">
+          <div style="position:absolute;inset:-36px;background:radial-gradient(ellipse,rgba(201,168,76,.17) 0%,transparent 70%);pointer-events:none"></div>
+          <div style="position:absolute;left:12px;top:14px;width:210px;height:290px;background:rgba(0,0,0,.5);filter:blur(18px)"></div>
+          <div class="ebook">
+            <div style="position:relative;z-index:1;padding:1.6rem 1.3rem 1.3rem 1.9rem;height:100%;display:flex;flex-direction:column">
+              <div style="font-size:.52rem;font-family:'Cinzel',serif;color:rgba(201,168,76,.55);letter-spacing:.2em;margin-bottom:.5rem">E-BOOK PREMIUM 2025</div>
+              <div style="width:32px;height:1px;background:linear-gradient(90deg,#7A5C1E,#C9A84C);margin-bottom:.8rem"></div>
+              <div style="font-family:'Cinzel',serif;font-size:1.05rem;font-weight:900;color:#F0EAD6;line-height:1.2;margin-bottom:.3rem">IA<br>Descomplicada</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:.72rem;font-style:italic;color:#7A6040;margin-bottom:1rem">Do Zero ao Avançado</div>
+              <div style="display:flex;flex-direction:column;gap:.35rem;flex:1">
+                <div v-for="c in caps" :key="c" style="font-size:.56rem;color:#5a4a2a;display:flex;align-items:center;gap:.35rem">
+                  <span style="color:#7A5C1E;font-size:.48rem">▸</span>{{c}}
+                </div>
+              </div>
+              <div style="margin-top:.8rem;padding-top:.6rem;border-top:1px solid rgba(201,168,76,.14)">
+                <div style="font-family:'Cinzel',serif;font-size:1.35rem;font-weight:900;color:#C9A84C">R$37</div>
+                <div style="font-size:.52rem;color:#3a3a38;letter-spacing:.1em">180+ PÁGINAS · PDF + EPUB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROMO BAR -->
+    <div style="border-top:1px solid rgba(201,168,76,.1);background:rgba(201,168,76,.04)">
+      <div style="max-width:1080px;margin:0 auto;padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:#C9A84C;font-weight:700;letter-spacing:.08em">
+          <span style="color:#ef4444">🔥</span> PROMOÇÃO POR TEMPO LIMITADO — EXPIRA EM:
+        </div>
+        <div style="display:flex;align-items:center;gap:.35rem">
+          <div class="cdb"><div style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:#C9A84C">{{pad(h)}}</div><div style="font-size:.58rem;color:#444;letter-spacing:.1em">HR</div></div>
+          <span style="font-family:'Cinzel',serif;font-size:1.1rem;color:rgba(201,168,76,.3)">:</span>
+          <div class="cdb"><div style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:#C9A84C">{{pad(m)}}</div><div style="font-size:.58rem;color:#444;letter-spacing:.1em">MIN</div></div>
+          <span style="font-family:'Cinzel',serif;font-size:1.1rem;color:rgba(201,168,76,.3)">:</span>
+          <div class="cdb"><div style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:900;color:#C9A84C">{{pad(sc)}}</div><div style="font-size:.58rem;color:#444;letter-spacing:.1em">SEG</div></div>
+        </div>
+        <div style="font-size:.7rem;color:#444">Após a promoção, o preço volta para R$67</div>
+      </div>
+    </div>
+  </section>`,
+  setup(){
+    const stats=[{v:'180+',l:'Páginas'},{v:'8',l:'Capítulos'},{v:'4.9★',l:'Avaliação'}];
+    const caps=['ChatGPT do zero ao pro','Gemini & Copilot','100 Prompts prontos','IA para seu negócio'];
+    const KEY='ia_t';
+    let end=+sessionStorage.getItem(KEY)||0;
+    if(!end){end=Date.now()+(11*3600+33*60)*1000;sessionStorage.setItem(KEY,end);}
+    const h=ref(11),m=ref(33),sc=ref(0);
+    const pad=n=>String(n).padStart(2,'0');
+    onMounted(()=>{
+      const tick=()=>{const r=Math.max(0,end-Date.now());h.value=Math.floor(r/3600000);m.value=Math.floor((r%3600000)/60000);sc.value=Math.floor((r%60000)/1000);if(r>0)setTimeout(tick,1000)};
+      tick();
+    });
+    return{stats,caps,h,m,sc,pad};
+  }
+}).mount('#hero-app');
+</script>
+
+
+<!-- ══════════════════════════════════
+  REACT — VIDEO
+══════════════════════════════════ -->
+<script type="text/babel">
+const {useState,useEffect,useRef}=React;
+
+function VideoSection(){
+  const [playing,setPlaying]=useState(false);
+  const [cta,setCta]=useState(false);
+  const tr=useRef(null);
+  const play=()=>{setPlaying(true);tr.current=setTimeout(()=>setCta(true),10000)};
+  useEffect(()=>()=>clearTimeout(tr.current),[]);
+
+  const feats=[
+    {i:'📖',t:'180+ Páginas',s:'Conteúdo denso e prático'},
+    {i:'⬇️',t:'Download Imediato',s:'PDF + EPUB'},
+    {i:'📱',t:'Leia em Qualquer Lugar',s:'Mobile, tablet, PC'},
+    {i:'🔄',t:'Atualizações Grátis',s:'Sempre atualizado'},
+  ];
+
+  return(
+    <section id="video" style={{background:'#0A0A0A',padding:'6rem 0',position:'relative',overflow:'hidden'}}>
+      <div style={{position:'absolute',inset:0,pointerEvents:'none',background:'radial-gradient(ellipse 65% 45% at 50% 100%,rgba(201,168,76,.05) 0%,transparent 70%)'}}/>
+      <div style={{maxWidth:800,margin:'0 auto',padding:'0 1.5rem'}}>
+
+        <div className="reveal" style={{textAlign:'center',marginBottom:'2.8rem'}}>
+          <div className="sl">▶ Apresentação</div>
+          <h2 className="st gold-text" style={{marginBottom:'1rem'}}>Veja o Que Você Vai Aprender</h2>
+          <div className="gold-line" style={{margin:'0 auto 1.4rem'}}/>
+          <p style={{fontFamily:'Cormorant Garamond,serif',fontStyle:'italic',fontSize:'1.1rem',lineHeight:1.8,color:'#7A6848'}}>
+            Assista à apresentação e veja como este e-book vai transformar sua relação com a Inteligência Artificial
+          </p>
+        </div>
+
+        <div className="reveal" style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'.5rem',marginBottom:'.7rem',fontSize:'.76rem',color:'rgba(201,168,76,.65)',fontWeight:600,letterSpacing:'.08em'}}>
+          <span style={{width:7,height:7,borderRadius:'50%',background:'#22c55e',display:'inline-block',boxShadow:'0 0 7px #22c55e'}}/>
+          623 pessoas viram esta página hoje
+        </div>
+
+        <div className="vwrap reveal" onClick={!playing?play:undefined}>
+          {!playing?(
+            <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'1rem',background:'linear-gradient(160deg,#120e00,#080808)'}}>
+              <div className="grid-bg" style={{position:'absolute',inset:0,opacity:.2,pointerEvents:'none'}}/>
+              <div style={{position:'absolute',top:18,left:18,right:18,bottom:18,border:'1px solid rgba(201,168,76,.06)',pointerEvents:'none'}}/>
+              <div style={{fontSize:'2.8rem',marginBottom:'.1rem'}}>🤖</div>
+              <div style={{width:76,height:76,borderRadius:'50%',background:'linear-gradient(135deg,#7A5C1E,#C9A84C)',display:'flex',alignItems:'center',justifyContent:'center',animation:'pulse-gold 2.5s infinite',position:'relative'}}>
+                <div style={{position:'absolute',inset:-9,borderRadius:'50%',border:'1px solid rgba(201,168,76,.2)',animation:'pulse-ring 2.5s infinite'}}/>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="#080808" style={{marginLeft:3}}><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <div style={{fontFamily:'Montserrat,sans-serif',fontSize:'.82rem',fontWeight:600,color:'#A09070',letterSpacing:'.1em'}}>CLIQUE PARA ASSISTIR</div>
+              <div style={{fontSize:'.72rem',color:'#3a3a38'}}>⏱ ~7 minutos · Apresentação do e-book</div>
+            </div>
+          ):(
+            <div style={{position:'absolute',inset:0,background:'#000',display:'flex',alignItems:'center',justifyContent:'center'}}>
+              {/* ↓ Cole seu iframe aqui ↓ */}
+              {/* <iframe style={{position:'absolute',inset:0,width:'100%',height:'100%'}} src="https://www.youtube.com/embed/SEU_ID?autoplay=1" frameBorder="0" allowFullScreen/> */}
+              <div style={{textAlign:'center'}}>
+                <div style={{fontFamily:'Cinzel,serif',fontSize:'clamp(1.4rem,4vw,2.2rem)',color:'rgba(201,168,76,.08)',letterSpacing:'.2em',marginBottom:'.5rem'}}>SEU VÍDEO AQUI</div>
+                <div style={{fontSize:'.72rem',color:'#222'}}>Substitua pelo iframe do YouTube ou Vimeo</div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:1,marginTop:1,background:'#1E1E1E',border:'1px solid #1E1E1E'}}>
+          {feats.map((f,i)=>(
+            <div key={i} className="card" style={{display:'flex',alignItems:'center',gap:'.7rem',padding:'.85rem 1rem',borderRadius:0,border:'none'}}>
+              <span style={{fontSize:'1.15rem'}}>{f.i}</span>
+              <div>
+                <div style={{fontSize:'.72rem',fontWeight:600,color:'#F0EAD6',marginBottom:1}}>{f.t}</div>
+                <div style={{fontSize:'.65rem',color:'#555'}}>{f.s}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {cta&&(
+          <div className="card" style={{marginTop:'2.5rem',padding:'2.2rem',textAlign:'center',borderColor:'rgba(201,168,76,.18)',animation:'fadeUp .5s ease forwards'}}>
+            <div style={{fontFamily:'Cormorant Garamond,serif',fontStyle:'italic',fontSize:'1.2rem',color:'#9A8060',marginBottom:'.4rem'}}>Gostou do que viu?</div>
+            <div className="st gold-text" style={{marginBottom:'1.4rem'}}>Garanta Seu E-book Agora</div>
+            <a href="#checkout" className="btn-gold">
+              <span>Sim, Quero por R$37</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+ReactDOM.createRoot(document.getElementById('video-app')).render(<VideoSection/>);
+</script>
+
+
+<!-- ══════════════════════════════════
+  VUE — BENEFITS
+══════════════════════════════════ -->
+<script>
+VA({
+  template:`
+  <section id="benefits" style="background:#080808;padding:6rem 0;position:relative">
+    <div class="gold-bar" style="position:absolute;top:0;left:0;right:0"></div>
+    <div style="max-width:1080px;margin:0 auto;padding:0 1.5rem">
+
+      <!-- PAIN -->
+      <div class="reveal" style="text-align:center;margin-bottom:5rem">
+        <div class="sl">🤔 Você Já se Perguntou...</div>
+        <h2 class="st" style="color:#F0EAD6;margin-bottom:.5rem">Isso Soa Familiar?</h2>
+        <div class="gold-line" style="margin:0 auto 2.5rem"></div>
+        <div class="t3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;max-width:840px;margin:0 auto 2.5rem">
+          <div v-for="p in pains" :key="p" style="display:flex;align-items:flex-start;gap:.7rem;padding:.95rem 1.1rem;background:rgba(192,57,43,.04);border:1px solid rgba(192,57,43,.12);font-size:.82rem;color:#6A5840">
+            <span style="color:#c0392b;flex-shrink:0;margin-top:1px">✗</span>{{p}}
+          </div>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:#7A6040">
+          Se você se identificou com alguma dessas situações, este e-book foi escrito <strong style="color:#C9A84C;font-style:normal">exatamente para você.</strong>
+        </p>
+      </div>
+
+      <div class="gold-bar" style="margin-bottom:5rem"></div>
+
+      <!-- CHAPTERS -->
+      
+      <!-- BONUSES -->
+      <div class="reveal" style="text-align:center;margin-bottom:2.5rem">
+        <div class="sl">🎁 Bônus Exclusivos</div>
+        <h2 class="st" style="color:#F0EAD6;margin-bottom:.4rem">Você Também Recebe</h2>
+      </div>
+      <div class="t3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:4rem">
+        <div v-for="b in bonuses" :key="b.t" class="card reveal" style="padding:1.4rem;text-align:center">
+          <div style="font-size:1.9rem;margin-bottom:.8rem">{{b.icon}}</div>
+          <div style="font-family:'Cinzel',serif;font-size:.78rem;color:#C9A84C;margin-bottom:.45rem">{{b.t}}</div>
+          <p style="font-size:.76rem;line-height:1.6;color:#484038">{{b.d}}</p>
+        </div>
+      </div>
+
+      <!-- VALUE STACK -->
+      <div class="card reveal" style="padding:3.2rem;text-align:center;border-color:rgba(201,168,76,.16);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-14px;right:8px;font-family:'Cinzel',serif;font-size:7rem;font-weight:900;color:rgba(201,168,76,.025);pointer-events:none;line-height:1;user-select:none">✦</div>
+        <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;color:#3a3a38;margin-bottom:1.1rem">Tudo isso por um preço especial de lançamento</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:.6rem">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;text-decoration:line-through;color:#2a2a2a">De R$67</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div>
+            <span style="font-family:'Cinzel',serif;font-size:3rem;font-weight:900;color:#C9A84C">R$37</span>
+            <span style="font-size:.82rem;color:#555;margin-left:.4rem">à vista</span>
+          </div>
+        </div>
+        <div style="font-size:.75rem;color:#3a3a38;margin-bottom:2.2rem">Pagamento único · Sem mensalidade · Download imediato</div>
+        <a href="#checkout" class="btn-gold" style="display:inline-flex">
+          <span>Aproveitar a Promoção Agora</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div style="font-size:.7rem;color:#2e2e2e;margin-top:.9rem">🔥 Promoção por tempo limitado — Preço pode subir a qualquer momento</div>
+      </div>
+    </div>
+  </section>`,
+  setup(){
+    const pains=[
+      '"Para que serve a IA no meu dia a dia?"',
+      '"Não sei por onde começar com ChatGPT"',
+      '"Me sinto para trás no mercado de trabalho"',
+      '"Já tentei usar IA mas os resultados foram ruins"',
+      '"Vejo todo mundo falando de IA mas me perco"',
+      '"Quero usar IA no meu negócio mas não sei como"',
+    ];
+    const chapters=[
+      {icon:'🤖',title:'O Que é IA e Como Funciona',desc:'Desmistificando a inteligência artificial sem jargões. Fundamentos claros e simples para qualquer pessoa entender.'},
+      {icon:'💬',title:'Dominando o ChatGPT',desc:'Do básico ao avançado: como fazer perguntas certas, criar prompts eficazes e extrair o máximo da ferramenta.'},
+      {icon:'🔮',title:'Gemini e Google AI',desc:'Explore o poder do Gemini integrado ao ecossistema Google para pesquisa, escrita e análise de dados.'},
+      {icon:'💼',title:'Microsoft Copilot no Trabalho',desc:'Use o Copilot no Word, Excel, PowerPoint e Outlook para dobrar sua produtividade no trabalho.'},
+      {icon:'✍️',title:'IA para Escrita e Conteúdo',desc:'Crie textos, e-mails, posts, relatórios e scripts profissionais usando IA como seu co-escritor.'},
+      {icon:'🎨',title:'IA para Imagens e Design',desc:'Midjourney, DALL-E, Stable Diffusion — crie imagens profissionais com prompts bem escritos.'},
+      {icon:'📊',title:'IA nos Negócios e Carreira',desc:'Estratégias práticas para vender mais, atender melhor e se destacar usando IA no seu trabalho.'},
+      {icon:'🚀',title:'O Futuro: O Que Vem Por Aí',desc:'Tendências para 2025–2026, ferramentas emergentes e como se preparar para as próximas transformações.'},
+    ];
+    const bonuses=[
+      {icon:'📋',t:'100 Prompts Prontos',d:'Coleção testada de prompts para ChatGPT, Gemini e Copilot — copie, cole e use imediatamente.'},
+      {icon:'🗺️',t:'Mapa Mental da IA',d:'Infográfico visual com todas as ferramentas organizadas por categoria, finalidade e nível de uso.'},
+      {icon:'💬',t:'Grupo VIP no WhatsApp',d:'Acesso ao grupo exclusivo para tirar dúvidas, receber novidades e conectar com outros leitores.'},
+    ];
+    return{pains,chapters,bonuses};
+  }
+}).mount('#benefits-app');
+</script>
+
+
+<!-- ══════════════════════════════════
+  REACT — TESTIMONIALS
+══════════════════════════════════ -->
+<script type="text/babel">
+function Testimonials(){
+  const reviews=[
+    {n:'Camila Souza',c:'São Paulo, SP',av:'C',cl:'#7A5C1E',q:'Finalmente entendi como usar o ChatGPT de verdade. O capítulo de prompts sozinho já valeu cada centavo. Li em dois dias, de tão envolvente.',hl:'Produtividade triplicou',s:5},
+    {n:'Roberto Lima',c:'Curitiba, PR',av:'R',cl:'#1E3D5C',q:'Comprei com ceticismo e fiquei completamente surpreso. Conteúdo atualizado, linguagem clara, exemplos práticos. Recomendo demais.',hl:'Usa IA diariamente no trabalho',s:5},
+    {n:'Fernanda Alves',c:'Fortaleza, CE',av:'F',cl:'#5C1E3D',q:'Sou professora e apliquei o conteúdo para preparar aulas com IA. Meus alunos adoraram a mudança. Transformou minha metodologia.',hl:'Aulas mais dinâmicas',s:5},
+    {n:'Thiago Marques',c:'BH, MG',av:'T',cl:'#1E5C3D',q:'Trabalho com marketing e o capítulo sobre criação de conteúdo me economiza horas toda semana. Investimento que se pagou no mesmo dia.',hl:'Economiza 3h por dia',s:5},
+    {n:'Lucia Ferreira',c:'Recife, PE',av:'L',cl:'#5C4A1E',q:'Tinha 62 anos e zero conhecimento em IA. Hoje uso o ChatGPT todo dia no meu negócio. O livro é muito didático, sem complicar.',hl:'Primeira experiência com IA ✓',s:5},
+  ];
+
+  return(
+    <section id="depoimentos" style={{background:'#0A0A0A',padding:'6rem 0',position:'relative'}}>
+      <div className="gold-bar" style={{position:'absolute',top:0,left:0,right:0}}/>
+      <div className="grid-bg" style={{position:'absolute',inset:0,opacity:.2,pointerEvents:'none'}}/>
+      <div style={{maxWidth:1080,margin:'0 auto',padding:'0 1.5rem',position:'relative'}}>
+
+        <div className="reveal" style={{textAlign:'center',marginBottom:'3.5rem'}}>
+          <div className="sl">💬 Feedbacks Reais</div>
+          <h2 className="st" style={{color:'#F0EAD6',marginBottom:'.2rem'}}>O Que os Leitores</h2>
+          <h2 className="st gold-text" style={{marginBottom:'1.4rem'}}>Estão Dizendo</h2>
+          <div className="gold-line" style={{margin:'0 auto 2rem'}}/>
+          <div className="card" style={{display:'inline-flex',alignItems:'center',gap:'2.5rem',padding:'.9rem 2rem',borderColor:'rgba(201,168,76,.12)'}}>
+            {[['⭐','4.9/5','Avaliação'],['📚','8.200+','Leitores'],['💬','1.400+','Feedbacks']].map(([ic,v,l])=>(
+              <div key={l} style={{textAlign:'center'}}>
+                <div style={{fontFamily:'Cinzel,serif',fontSize:'1.05rem',fontWeight:900,color:'#C9A84C'}}>{ic} {v}</div>
+                <div style={{fontSize:'.62rem',color:'#444',letterSpacing:'.08em',marginTop:2}}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* FEATURED */}
+        <div className="card reveal" style={{padding:'2.5rem 3rem',marginBottom:'1.2rem',borderColor:'rgba(201,168,76,.18)',position:'relative',overflow:'hidden'}}>
+          <div style={{position:'absolute',top:0,left:0,right:0,height:2,background:'linear-gradient(90deg,transparent,#C9A84C,transparent)'}}/>
+          <div style={{position:'absolute',top:-8,left:0,fontFamily:'Cinzel,serif',fontSize:'8rem',lineHeight:1,color:'rgba(201,168,76,.03)',fontWeight:900,userSelect:'none',pointerEvents:'none'}}>❝</div>
+          <blockquote style={{fontFamily:'Cormorant Garamond,serif',fontStyle:'italic',fontSize:'1.2rem',lineHeight:1.8,color:'#A09070',marginBottom:'1.8rem',paddingLeft:'2.2rem',position:'relative'}}>
+            Comprei achando que seria mais um e-book básico. Me surpreendi muito. Em{' '}
+            <strong style={{color:'#C9A84C',fontStyle:'normal'}}>uma semana</strong> já estava usando IA para escrever contratos, responder e-mails e preparar apresentações. O retorno sobre o investimento foi{' '}
+            <strong style={{color:'#C9A84C',fontStyle:'normal'}}>imediato e valeu muito</strong>.
+          </blockquote>
+          <div style={{display:'flex',alignItems:'center',gap:'1rem',flexWrap:'wrap'}}>
+            <div style={{width:50,height:50,borderRadius:'50%',background:'linear-gradient(135deg,#7A5C1E,#C9A84C)',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Cinzel,serif',fontSize:'1.2rem',fontWeight:900,color:'#080808',flexShrink:0}}>A</div>
+            <div style={{flex:1}}>
+              <div style={{fontWeight:600,color:'#F0EAD6',marginBottom:2}}>Ana Paula Ribeiro</div>
+              <div style={{fontSize:'.72rem',color:'#555'}}>Advogada · São Paulo, SP</div>
+              <div style={{fontSize:'.82rem',marginTop:3}}>⭐⭐⭐⭐⭐</div>
+            </div>
+            <div style={{padding:'.55rem 1.1rem',background:'rgba(201,168,76,.07)',border:'1px solid rgba(201,168,76,.16)',textAlign:'center'}}>
+              <div style={{fontFamily:'Cinzel,serif',fontSize:'1.2rem',fontWeight:900,color:'#C9A84C'}}>R$37</div>
+              <div style={{fontSize:'.6rem',color:'#555',letterSpacing:'.08em'}}>MELHOR INVESTIMENTO</div>
+            </div>
+          </div>
+        </div>
+
+        {/* GRID */}
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1rem',marginBottom:'1.8rem'}} className="tg">
+          {reviews.map((r,i)=>(
+            <div key={r.n} className="card reveal" style={{padding:'1.4rem',display:'flex',flexDirection:'column'}}>
+              <div style={{fontSize:'.8rem',marginBottom:'.65rem'}}>{'⭐'.repeat(r.s)}</div>
+              <p style={{fontFamily:'Cormorant Garamond,serif',fontStyle:'italic',fontSize:'.93rem',lineHeight:1.65,flex:1,marginBottom:'1.1rem',color:'#6A5840'}}>"{r.q}"</p>
+              <div style={{display:'flex',alignItems:'center',gap:'.7rem',marginBottom:'.65rem'}}>
+                <div style={{width:34,height:34,borderRadius:'50%',background:`linear-gradient(135deg,${r.cl},#C9A84C)`,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:900,color:'white',fontSize:'.82rem',flexShrink:0}}>{r.av}</div>
+                <div>
+                  <div style={{fontSize:'.76rem',fontWeight:600,color:'#F0EAD6'}}>{r.n}</div>
+                  <div style={{fontSize:'.62rem',color:'#444'}}>{r.c}</div>
+                </div>
+              </div>
+              <div style={{paddingTop:'.55rem',borderTop:'1px solid #1E1E1E',fontSize:'.68rem',color:'#C9A84C',fontWeight:600}}>✦ {r.hl}</div>
+            </div>
+          ))}
+        </div>
+
+        <LiveBuyers/>
+      </div>
+    </section>
+  );
+}
+
+function LiveBuyers(){
+  const pool=[
+    {n:'João M.',c:'Campinas'},{n:'Fernanda L.',c:'Brasília'},{n:'Carlos R.',c:'Recife'},
+    {n:'Beatriz S.',c:'Salvador'},{n:'Rodrigo T.',c:'Florianópolis'},{n:'Amanda P.',c:'Goiânia'},
+    {n:'Lucas W.',c:'Natal'},{n:'Isabela F.',c:'Porto Alegre'},
+  ];
+  const [list,setList]=useState(pool.slice(0,3));
+  useEffect(()=>{
+    let i=3;
+    const iv=setInterval(()=>{
+      const s=[];for(let k=0;k<3;k++)s.push(pool[(i+k)%pool.length]);
+      setList(s);i++;
+    },5500);
+    return()=>clearInterval(iv);
+  },[]);
+  return(
+    <div style={{display:'flex',flexDirection:'column',gap:'.45rem'}}>
+      {list.map((p,i)=>(
+        <div key={p.n+i} style={{display:'flex',alignItems:'center',gap:'.7rem',padding:'.6rem 1rem',background:'rgba(201,168,76,.02)',border:'1px solid #181818',fontSize:'.76rem',color:'#4e4638'}}>
+          <span style={{width:7,height:7,borderRadius:'50%',background:'#22c55e',flexShrink:0,boxShadow:'0 0 6px #22c55e'}}/>
+          <strong style={{color:'#9A8060'}}>{p.n}</strong> de {p.c} acabou de baixar o e-book
+          <span style={{marginLeft:'auto',color:'#2a2a2a',fontStyle:'italic'}}>agora mesmo</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('testi-app')).render(<Testimonials/>);
+</script>
+
+
+<!-- ══════════════════════════════════
+  VUE — FAQ
+══════════════════════════════════ -->
+<script>
+VA({
+  template:`
+  <section id="faq" style="background:#080808;padding:6rem 0;position:relative">
+    <div class="gold-bar" style="position:absolute;top:0;left:0;right:0"></div>
+    <div style="max-width:740px;margin:0 auto;padding:0 1.5rem">
+      <div class="reveal" style="text-align:center;margin-bottom:3.5rem">
+        <div class="sl">❓ Dúvidas</div>
+        <h2 class="st" style="color:#F0EAD6;margin-bottom:.5rem">Perguntas Frequentes</h2>
+        <div class="gold-line" style="margin:0 auto"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.45rem">
+        <div v-for="(f,i) in faqs" :key="i"
+             class="card reveal" :class="'d'+Math.min(i+1,5)"
+             :style="open===i?'border-color:rgba(201,168,76,.2)':''">
+          <button style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.15rem 1.4rem;background:none;border:none;cursor:pointer;text-align:left;gap:.9rem" @click="toggle(i)">
+            <span style="font-family:'Montserrat',sans-serif;font-size:.86rem;font-weight:600;transition:color .3s"
+                  :style="open===i?'color:#C9A84C':'color:#9A8A70'">{{f.q}}</span>
+            <div style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s"
+                 :style="open===i?'background:rgba(201,168,76,.1);color:#C9A84C':'background:#1A1A1A;color:#444'">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                   :style="open===i?'transform:rotate(45deg)':''" style="transition:transform .3s">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </div>
+          </button>
+          <div class="fab-body" :class="open===i?'open':''">
+            <p style="padding:0 1.4rem 1.1rem;font-size:.82rem;line-height:1.75;color:#5A5040" v-html="f.a"></p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="text-align:center;margin-top:2.8rem">
+        <p style="font-size:.8rem;color:#333;margin-bottom:.9rem">Ficou com alguma dúvida antes de comprar?</p>
+        <a href="https://wa.me/5500000000000" target="_blank" class="btn-out">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>`,
+  setup(){
+    const open=ref(null);
+    const toggle=i=>{open.value=open.value===i?null:i};
+    const faqs=[
+      {q:'Para quem é este e-book?',a:'Para qualquer pessoa que queira entender e usar Inteligência Artificial — profissionais, estudantes, empreendedores, professores. Não é necessário nenhum conhecimento técnico prévio.'},
+      {q:'Como recebo o e-book após a compra?',a:'Imediatamente após a confirmação do pagamento, você receberá um e-mail com o link para download. O e-book está disponível nos formatos <strong style="color:#C9A84C">PDF e EPUB</strong>, compatíveis com qualquer dispositivo.'},
+  
+      {q:'Preciso de internet para ler?',a:'Não. Após baixar o arquivo PDF, você pode ler offline em qualquer dispositivo — celular, tablet ou computador — sem precisar de conexão com a internet.'},
+      {q:'Por que o preço é R$37 e não mais?',a:'Acreditamos que o conhecimento sobre IA deve ser acessível para todos. O preço é pensado para que qualquer pessoa possa aprender, independente da situação financeira. <strong style="color:#C9A84C">É uma promoção por tempo limitado</strong> — o preço pode subir.'},
+    ];
+    return{faqs,open,toggle};
+  }
+}).mount('#faq-app');
+</script>
+
+
+<!-- ══════════════════════════════════
+  VUE — CHECKOUT
+══════════════════════════════════ -->
+<script>
+VA({
+  template:`
+  <section id="checkout" style="background:#0A0A0A;padding:6rem 0;position:relative;overflow:hidden">
+    <div class="gold-bar" style="position:absolute;top:0;left:0;right:0"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 65% 50% at 50% 110%,rgba(201,168,76,.06) 0%,transparent 70%)"></div>
+    <div style="max-width:920px;margin:0 auto;padding:0 1.5rem;position:relative">
+
+      <!-- PROMO BAR -->
+      <div class="card reveal" style="padding:1.4rem 2rem;margin-bottom:2.8rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;border-color:rgba(201,168,76,.15);background:rgba(201,168,76,.025)">
+        <div style="font-size:1.7rem">🔥</div>
+        <div style="flex:1">
+          <div style="font-family:'Cinzel',serif;font-size:.92rem;font-weight:700;color:#F0EAD6;margin-bottom:.15rem">Promoção por Tempo Limitado</div>
+          <div style="font-size:.76rem;color:#555">Aproveite o preço especial antes que o timer chegue a zero</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.35rem;margin-left:auto">
+          <div class="cdb"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;color:#C9A84C">{{pad(h)}}</div><div style="font-size:.55rem;color:#333;letter-spacing:.1em">HR</div></div>
+          <span style="font-family:'Cinzel',serif;font-size:1.4rem;color:rgba(201,168,76,.28)">:</span>
+          <div class="cdb"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;color:#C9A84C">{{pad(m)}}</div><div style="font-size:.55rem;color:#333;letter-spacing:.1em">MIN</div></div>
+          <span style="font-family:'Cinzel',serif;font-size:1.4rem;color:rgba(201,168,76,.28)">:</span>
+          <div class="cdb"><div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:900;color:#C9A84C">{{pad(sc)}}</div><div style="font-size:.55rem;color:#333;letter-spacing:.1em">SEG</div></div>
+        </div>
+      </div>
+
+      <!-- MAIN BOX -->
+      <div class="card reveal" style="overflow:hidden;border-color:rgba(201,168,76,.16)">
+        <div style="height:3px;background:linear-gradient(90deg,#7A5C1E,#C9A84C,#F5E094,#C9A84C,#7A5C1E)"></div>
+        <div style="padding:3rem">
+
+          <div style="text-align:center;margin-bottom:2.8rem">
+            <div class="sl">🔒 Compra Segura e Protegida</div>
+            <h2 class="st gold-text" style="margin-bottom:.7rem">Garanta Seu E-book Agora</h2>
+            <div class="gold-line" style="margin:0 auto .9rem"></div>
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#6A5840">Download imediato após a confirmação · Formatos PDF e EPUB</p>
+          </div>
+
+          <div class="t2" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem">
+
+            <!-- LEFT -->
+            <div>
+              <div style="font-size:.66rem;font-family:'Cinzel',serif;color:#C9A84C;letter-spacing:.2em;margin-bottom:1.1rem">VOCÊ ESTÁ RECEBENDO:</div>
+              <ul style="display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem;list-style:none">
+                <li v-for="it in includes" :key="it" style="display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:#7A6848">
+                  <span style="color:#C9A84C;flex-shrink:0;margin-top:1px">✦</span>{{it}}
+                </li>
+              </ul>
+              <div style="border:1px solid #1E1E1E;overflow:hidden;margin-bottom:1.4rem">
+                <div style="display:flex;justify-content:space-between;padding:.7rem 1rem;font-size:.75rem;color:#333;border-bottom:1px solid #1E1E1E">
+                  <span>Preço normal</span><span style="text-decoration:line-through">R$67,00</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:.8rem 1rem;font-size:.92rem;color:#F0EAD6;font-weight:700;border-bottom:1px solid #1E1E1E;background:rgba(201,168,76,.04)">
+                  <span>Preço promocional</span>
+                  <span style="font-family:'Cinzel',serif;color:#C9A84C">R$37,00</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:.6rem 1rem;font-size:.72rem;color:#22c55e">
+                  <span>Sua economia</span><span style="font-weight:700">R$30,00 (45% off)</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div style="display:flex;flex-direction:column;gap:.9rem">
+              <div style="padding:1.9rem;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.16);position:relative">
+                <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);padding:.22rem .9rem;background:#C9A84C;font-family:'Cinzel',serif;font-size:.6rem;font-weight:900;color:#080808;letter-spacing:.15em;white-space:nowrap">🔥 PROMOÇÃO ATIVA</div>
+                <div style="font-size:.7rem;color:#555;margin-bottom:.25rem">Pagamento único · Sem mensalidade</div>
+                <div style="font-family:'Cinzel',serif;font-size:2.8rem;font-weight:900;color:#C9A84C;line-height:1;margin-bottom:.2rem">R$37</div>
+                <div style="font-size:.72rem;color:#3a3a38;margin-bottom:1.4rem">PIX • Cartão de Crédito • Boleto</div>
+                <!-- ↓ SUBSTITUA pelo seu link real ↓ -->
+                <a href="https://pay.hotmart.com/SEU_PRODUTO_ID" target="_blank" class="btn-gold animate-pulse-gold" style="width:100%;justify-content:center">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 13l4 4L19 7"/></svg>
+                  <span>Comprar Agora — R$37</span>
+                </a>
+              </div>
+
+              <div style="display:flex;gap:.35rem;flex-wrap:wrap">
+                <span v-for="p in payments" :key="p" style="padding:.22rem .55rem;background:#0f0f0f;border:1px solid #1A1A1A;font-size:.6rem;font-weight:700;color:#333;letter-spacing:.05em">{{p}}</span>
+              </div>
+              <div style="display:flex;gap:1rem;font-size:.7rem;color:#2a2a2a;flex-wrap:wrap">
+                <span>🔒 SSL 256-bit</span><span>✓ Compra Protegida</span><span>📧 Entrega Imediata</span>
+              </div>
+
+              <div style="padding:1.1rem;border:1px solid #1A1A1A;margin-top:.3rem">
+                <div style="font-size:.65rem;font-family:'Cinzel',serif;color:#444;letter-spacing:.12em;margin-bottom:.75rem">APÓS A COMPRA:</div>
+                <div v-for="(s,i) in steps" :key="s" style="display:flex;align-items:center;gap:.55rem;font-size:.75rem;color:#4a4038;margin-bottom:.45rem">
+                  <div style="width:17px;height:17px;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.18);display:flex;align-items:center;justify-content:center;font-size:.58rem;font-family:'Cinzel',serif;color:#C9A84C;flex-shrink:0;font-weight:900">{{i+1}}</div>
+                  {{s}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL NOTE -->
+      <div class="reveal" style="text-align:center;margin-top:2.8rem">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:#383028;max-width:580px;margin:0 auto;line-height:1.8">
+          Por apenas <strong style="color:#C9A84C;font-style:normal">R$37</strong>, você acessa um guia completo que vai mudar para sempre sua relação com a Inteligência Artificial.
+          <strong style="color:#F0EAD6;font-style:normal">Sem risco — garantia incondicional de 7 dias.</strong>
+        </p>
+      </div>
+    </div>
+  </section>`,
+  setup(){
+    const KEY='ia_t';
+    let end=+sessionStorage.getItem(KEY)||0;
+    if(!end){end=Date.now()+(11*3600+33*60)*1000;sessionStorage.setItem(KEY,end);}
+    const h=ref(11),m=ref(33),sc=ref(0);
+    const pad=n=>String(n).padStart(2,'0');
+    onMounted(()=>{
+      const tick=()=>{const r=Math.max(0,end-Date.now());h.value=Math.floor(r/3600000);m.value=Math.floor((r%3600000)/60000);sc.value=Math.floor((r%60000)/1000);if(r>0)setTimeout(tick,1000)};
+      tick();
+    });
+    const includes=[
+      'E-book IA Descomplicada — 180+ páginas',
+      'Formato PDF + EPUB (todos os dispositivos)',
+      'Bônus: 100 Prompts Prontos para usar',
+      'Bônus: Mapa Mental das Ferramentas de IA',
+      'Bônus: Acesso ao Grupo VIP no WhatsApp',
+      'Atualizações gratuitas do e-book',
+    ];
+    const payments=['PIX','VISA','MASTER','BOLETO','ELO','AMEX'];
+    const steps=[
+      'Receba o e-mail de confirmação',
+      'Clique no link para download',
+      'Salve o PDF/EPUB no dispositivo',
+      'Comece a ler imediatamente',
+    ];
+    return{h,m,sc,pad,includes,payments,steps};
+  }
+}).mount('#checkout-app');
+</script>
+
+
+<!-- ══════════════════════════════════
+  GLOBAL JS
+══════════════════════════════════ -->
+<script>
+// SCROLL PROGRESS
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('progress');
+  if(el)el.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';
+});
+
+// STICKY BAR
+window.addEventListener('scroll',()=>{
+  const bar=document.getElementById('sbar');
+  const co=document.getElementById('checkout');
+  if(!bar)return;
+  const atCo=co&&window.scrollY+window.innerHeight>co.offsetTop+80;
+  bar.classList.toggle('show',window.scrollY>600&&!atCo);
+});
+
+// REVEAL
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.07,rootMargin:'0px 0px -40px 0px'});
+function watchR(){document.querySelectorAll('.reveal').forEach(el=>ro.observe(el))}
+setTimeout(watchR,300);
+new MutationObserver(watchR).observe(document.body,{childList:true,subtree:true});
+
+// SMOOTH SCROLL
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(a){e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});}
+});
+
+// NOTIFICATIONS
+const buyers=[
+  {n:'Maria S.',c:'São Paulo'},{n:'João L.',c:'Curitiba'},{n:'Carla M.',c:'Recife'},
+  {n:'Pedro A.',c:'Salvador'},{n:'Juliana F.',c:'Goiânia'},{n:'André R.',c:'Fortaleza'},
+  {n:'Tatiane O.',c:'BH'},{n:'Felipe B.',c:'Manaus'},
+];
+let bi=0;
+function showN(){
+  const p=document.getElementById('notif');
+  const t=document.getElementById('notif-text');
+  if(!p||!t)return;
+  const b=buyers[bi%buyers.length];
+  t.textContent=`${b.n} de ${b.c} acabou de baixar o e-book`;
+  p.classList.add('show');
+  setTimeout(()=>p.classList.remove('show'),3800);
+  bi++;
+}
+setTimeout(()=>{showN();setInterval(showN,16000);},9000);
+
+// PULSE-RING KEYFRAME
+const s=document.createElement('style');
+s.textContent='@keyframes pulse-ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.65);opacity:0}} @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}';
+document.head.appendChild(s);
+</script>
+</body>
 </html>
