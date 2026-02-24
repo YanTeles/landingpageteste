@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7A5C1E"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#E8C96A"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#080808"/>
+  <!-- Stylized "AI" / neural node: central dot + connecting arcs -->
+  <circle cx="16" cy="14" r="3" fill="url(#g)"/>
+  <path stroke="url(#g)" stroke-width="1.8" stroke-linecap="round" fill="none" d="M16 17v4M12 11l-3 2M20 11l3 2M10 18l-2 3M22 18l2 3"/>
+  <circle cx="16" cy="22" r="1.2" fill="url(#g)" opacity=".85"/>
+</svg>
